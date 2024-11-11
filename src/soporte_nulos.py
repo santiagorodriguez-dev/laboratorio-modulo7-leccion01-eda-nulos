@@ -90,17 +90,18 @@ class GestionNulos:
         - tamano_grafica: Tamaño de las gráficas de caja.
         """
         col_numericas = self.seleccionar_columnas_nulas()[1]
+        print(len(col_numericas))
+        if (len(col_numericas) > 0):
+            num_cols = len(col_numericas)
+            num_filas = math.ceil(num_cols / 2)
 
-        num_cols = len(col_numericas)
-        num_filas = math.ceil(num_cols / 2)
+            fig, axes = plt.subplots(num_filas, 2, figsize=tamano_grafica)
+            axes = axes.flat
 
-        fig, axes = plt.subplots(num_filas, 2, figsize=tamano_grafica)
-        axes = axes.flat
-
-        for indice, col in enumerate(col_numericas):
-            sns.boxplot(x=col, data=self.dataframe, ax=axes[indice])
-            
-        plt.tight_layout();
+            for indice, col in enumerate(col_numericas):
+                sns.boxplot(x=col, data=self.dataframe, ax=axes[indice])
+                
+            plt.tight_layout();
 
     def imputar_knn(self, lista_columnas_knn):
         """
